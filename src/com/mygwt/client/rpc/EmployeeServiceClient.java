@@ -1,0 +1,15 @@
+package com.mygwt.client.rpc;
+
+import java.util.List;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.mygwt.shared.entity.Employee;
+
+public interface EmployeeServiceClient {
+
+	void delete(int id, AsyncCallback<Void> callback);
+	void findById(int id, AsyncCallback<Employee> callback);
+	void listAll(AsyncCallback<List<Employee>> callback);
+	void save(Employee employee, AsyncCallback<Employee> callback);
+
+}
