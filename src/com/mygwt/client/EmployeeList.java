@@ -4,16 +4,21 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.mygwt.client.rpc.EmployeeServiceClientImpl;
 import com.mygwt.shared.entity.Employee;
 
 public class EmployeeList extends Composite {
@@ -24,14 +29,22 @@ public class EmployeeList extends Composite {
 	interface EmployeeListUiBinder extends UiBinder<Widget, EmployeeList> {
 	}
 
-	public EmployeeList() {
+	public EmployeeList(EmployeeServiceClientImpl service) {
 		initWidget(uiBinder.createAndBindUi(this));
+		this.service = service;
+		
+		
 	}
 
-	public EmployeeList(String firstName) {
-		initWidget(uiBinder.createAndBindUi(this));
-	}
-
+	private EmployeeServiceClientImpl service;
+	/*@UiField
+	SimpleLayoutPanel simplePanel;	
+	@UiField
+	FormPanel formPanel;
+	@UiField
+	TextBox txtName;*/
+	
+	
 	public void fillTable(List<Employee> employees) {
 		DataGrid<Employee> table = new DataGrid<Employee>();
 		table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
@@ -41,6 +54,8 @@ public class EmployeeList extends Composite {
 		table.setRowCount(employees.size(), true);
 		table.setRowData(0, employees);
 		table.setWidth("100%");
+		/*simplePanel.add(table);
+		RootLayoutPanel.get().add(simplePanel);*/
 		SimpleLayoutPanel slp = new SimpleLayoutPanel();
 		slp.add(table);
 		RootLayoutPanel.get().add(slp);
@@ -84,8 +99,8 @@ public class EmployeeList extends Composite {
 					public void onSelectionChange(SelectionChangeEvent event) {
 						Employee selected = selectionModel.getSelectedObject();
 						if (selected != null) {
-							Window.alert("You selected: "
-									+ selected.getName());
+							//Window.alert("You selected: " + selected.getName());
+							service.findById(selected.getId());
 						}
 					}
 				});

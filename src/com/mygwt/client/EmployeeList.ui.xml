@@ -5,6 +5,10 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-		
+		<!-- <g:SimpleLayoutPanel ui:field = "simplePanel"></g:SimpleLayoutPanel>
+		<g:FormPanel ui:field = "formPanel" >
+		    <g:Label>Name</g:Label>
+		    <g:TextBox ui:field="txtName"/>
+		</g:FormPanel> -->
 	</g:HTMLPanel>
 </ui:UiBinder> 

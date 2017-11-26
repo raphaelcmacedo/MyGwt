@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @SuppressWarnings("serial")
-@XmlRootElement(name="Employees")
+@XmlRootElement(name="List")
 public class Employees implements Serializable {
 	private List<Employee> list = new ArrayList<Employee>();
 	

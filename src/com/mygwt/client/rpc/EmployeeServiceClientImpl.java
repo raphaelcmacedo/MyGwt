@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.mygwt.client.EmployeeList;
 import com.mygwt.shared.entity.Employee;
 
@@ -15,11 +16,13 @@ public class EmployeeServiceClientImpl implements EmployeeServiceClient {
 	
 	public EmployeeServiceClientImpl(String url) {
 		this.service = GWT.create(EmployeeService.class);
+		/*ServiceDefTarget endpoint = (ServiceDefTarget)this.service;
+		endpoint.setServiceEntryPoint(url);*/
 		this.genericCallback = new GenericCallback();
-		this.employeeList = new EmployeeList();
+		this.employeeList = new EmployeeList(this);
 		
 		//List the employees
-		this.listAll(genericCallback);
+		this.listAll();
 	}
 
 	public EmployeeList getEmployeeList() {
@@ -31,25 +34,24 @@ public class EmployeeServiceClientImpl implements EmployeeServiceClient {
 	}
 
 	@Override
-	public void delete(int id, AsyncCallback<Void> callback) {
+	public void delete(int id) {
 		this.service.delete(id, genericCallback);
 	}
 
 	@Override
-	public void findById(int id, AsyncCallback<Employee> callback) {
+	public void findById(int id) {
 		this.service.findById(id, genericCallback);
 		
 	}
 
 	@Override
-	public void listAll(AsyncCallback<List<Employee>> callback) {
-		System.out.println("chamou lista");
+	public void listAll() {
 		this.service.listAll(genericCallback);
 		
 	}
 
 	@Override
-	public void save(Employee employee, AsyncCallback<Employee> callback) {
+	public void save(Employee employee) {
 		this.service.save(employee, genericCallback);
 		
 	}
@@ -68,6 +70,8 @@ public class EmployeeServiceClientImpl implements EmployeeServiceClient {
 			if (result instanceof List) {
 				List<Employee> employees = (List<Employee>) result;
 				employeeList.fillTable(employees);
+			} else if (result instanceof Employee) {
+				Employee employee = (Employee) result;
 				
 			}
 		}

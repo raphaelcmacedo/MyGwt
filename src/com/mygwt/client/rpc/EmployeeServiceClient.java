@@ -7,9 +7,9 @@ import com.mygwt.shared.entity.Employee;
 
 public interface EmployeeServiceClient {
 
-	void delete(int id, AsyncCallback<Void> callback);
-	void findById(int id, AsyncCallback<Employee> callback);
-	void listAll(AsyncCallback<List<Employee>> callback);
-	void save(Employee employee, AsyncCallback<Employee> callback);
+	void delete(int id);
+	void findById(int id);
+	void listAll();
+	void save(Employee employee);
 
 }
