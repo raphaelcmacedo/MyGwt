@@ -1,14 +1,41 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:cell="urn:import:com.google.gwt.user.cellview.client">
 	<ui:style>
-	
+		.buttons-container{
+			margin: 10px 0px 10px;
+		}
+		
+		Button{
+    		margin: 0px 10px 0px;
+		}
+
 	</ui:style>
 	<g:HTMLPanel>
-		<!-- <g:SimpleLayoutPanel ui:field = "simplePanel"></g:SimpleLayoutPanel>
-		<g:FormPanel ui:field = "formPanel" >
-		    <g:Label>Name</g:Label>
-		    <g:TextBox ui:field="txtName"/>
-		</g:FormPanel> -->
+		<g:DecoratorPanel >
+			<cell:CellTable ui:field="table"></cell:CellTable>
+		</g:DecoratorPanel>
+		
+		
+		    <div class='{style.buttons-container}'>
+			    <g:Button ui:field="btnClear">Clear</g:Button>
+			    <g:Button ui:field="btnSave">Save</g:Button>
+			    <g:Button ui:field="btnDelete">Delete</g:Button>    
+		    </div>
+		    
+		
+		
+		<g:Label>ID</g:Label>
+		<g:TextBox ui:field="txtId" enabled="false" />
+		<g:Label>Name</g:Label>
+		<g:TextBox ui:field="txtName" />
+		<g:Label>Site</g:Label>
+		<g:ListBox ui:field="txtSite" />
+		<g:Label>Position</g:Label>
+		<g:TextBox ui:field="txtPosition" />
+
+
 	</g:HTMLPanel>
+
+	<!-- <g:HTMLPanel> </g:HTMLPanel> -->
 </ui:UiBinder> 
